@@ -1,0 +1,18 @@
+Centipede User Manual
+--------------------------------------------------
+
+Menu Controls:
+
+Move up         ^
+Move down    V
+To select     Enter
+To return    Backspace
+
+Game Controls:
+--------------
+Move right   >
+Move left     <
+Shoot 	      Spacebar
+To quit         Esc
+
+
