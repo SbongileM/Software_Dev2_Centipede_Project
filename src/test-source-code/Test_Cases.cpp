@@ -47,4 +47,34 @@ TEST_CASE("Centipede segment alive")
     CHECK_FALSE(centipede.isDead());
 }
 
+// ------------- Tests for Collisions ----------------
+//
+//// Test null case for contains() first - here, an empty line
+TEST_CASE("Score is updated when a centipede segment is shot")
+{
+    int x = 50;
+    int y =60;
+    VecOfCentipede heads;
+    VecOfCentipede body;
+    BulletList bullets;
+
+
+    auto engine = GameBase();
+    auto collision = CollisionDetector();
+    auto head = Centipede(x,y);
+    auto tail = Centipede(x,y);
+    auto bullet =make_shared<Bullet>(Bullet(x,y, Direction::UP));
+
+    heads.push_back(make_shared<Centipede>(head));
+    body.push_back(make_shared<Centipede>(tail));
+    bullets.push_back(bullet);
+
+    collision.checkCollisions(heads,body,bullets);
+    engine.createCentipedeseg();
+    engine.gameLogic();
+
+    //CHECK(head.isAlive());
+    //CHECK(tail.isAlive());
+    CHECK(engine.getScore()== 0);
+}
 
