@@ -22,3 +22,16 @@ TEST_CASE("Player is Alive")
     CHECK(player.isAlive());
 }
 
+// ------------- Tests for Centipede ----------------
+//
+TEST_CASE("Centipede is found at the set position")
+{
+    int x = 50;
+    int y =60;
+
+    auto centipede = Centipede(x,y);
+
+    CHECK(centipede.getXpos()==x);
+    CHECK(centipede.getYpos()==y);
+}
+
