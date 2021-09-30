@@ -35,3 +35,16 @@ TEST_CASE("Centipede is found at the set position")
     CHECK(centipede.getYpos()==y);
 }
 
+TEST_CASE("Centipede segment alive")
+{
+    int x = 50;
+    int y =60;
+
+    auto centipede = Centipede(x,y);
+    auto alive = State::ALIVE;
+    centipede.setState(alive);
+
+    CHECK_FALSE(centipede.isDead());
+}
+
+
