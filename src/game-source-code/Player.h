@@ -24,6 +24,10 @@ public:
 
      void moveRight();
 
+     void moveUp();
+
+     void moveDown();
+
 private:
     int speed;
     int xPosition;
