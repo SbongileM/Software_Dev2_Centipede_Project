@@ -2,9 +2,9 @@
 
 Player::Player()
 {
-    xPosition = 300;
-    yPosition = 600;
-    speed = 30;
+    xPosition = 360;
+    yPosition = 640;
+    speed = 20;
     state_of_player = ALIVE;
 
 }
@@ -28,14 +28,9 @@ void Player::setState(State state)
 {
     state_of_player = state;
 }
-
-float Player::getXpos()
+void Player::setDirection(Direction direction_)
 {
-    return xPosition;
+    direction= direction_;
 }
 
-float Player::getYpos()
-{
-    return yPosition;
-}
 

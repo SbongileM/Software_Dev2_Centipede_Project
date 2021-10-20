@@ -6,55 +6,29 @@ class Player
 {
 public:
 
-    /** \brief Default Constructor
-     *
-     * Initialises the private members of the class.
-     */
      Player();
 
-    /** \brief Returns true galaxip if ALIVE.
-     *
-     * \return bool
-     *
-     */
-    bool isAlive();
+     bool isAlive();
 
-    /** \brief Returns a float which represents the x coordinate of the player.
-     *
-     * \return float
-     *
-     */
-    float getXpos();
+     int getXpos(){return xPosition;};
 
-    /** \brief Returns a float which represents the y coordinate of the player.
-     *
-     * \return float
-     *
-     */
-    float getYpos();
+     int getYpos(){return yPosition;};
 
-    /** \brief Sets the state of the player, namely dead or alive.
-     *
-     * \param state State
-     * \return void
-     *
-     */
-    void setState(State state);
+     Direction getDirection(){return direction;};
 
-    /** \brief Moves the player to the left.
-     *
-     */
-    void moveLeft();
+     void setState(State state);
 
-    /** \brief Moves the player to the right.
-     *
-     */
-    void moveRight();
+     void setDirection(Direction direction_);
+
+     void moveLeft();
+
+     void moveRight();
 
 private:
     int speed;
-    float xPosition;
-    float yPosition;
+    int xPosition;
+    int yPosition;
+    Direction direction;
     State state_of_player;
 };
 
