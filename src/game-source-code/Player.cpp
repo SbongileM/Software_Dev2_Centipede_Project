@@ -38,9 +38,29 @@ void Player::setState(State state)
 {
     state_of_player = state;
 }
+
 void Player::setDirection(Direction direction_)
 {
     direction= direction_;
 }
 
-
+void Player::changeDirection()
+{
+    switch (getDirection())
+        {
+        case Direction::RIGHT:
+            moveLeft();
+            break;
+        case Direction::LEFT:
+            moveRight();
+            break;
+        case Direction::DOWN:
+            moveUp();
+            break;
+        case Direction::UP:
+            moveDown();
+            break;
+        default:
+            break;
+        }
+}

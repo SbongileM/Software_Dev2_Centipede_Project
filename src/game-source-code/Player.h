@@ -28,6 +28,8 @@ public:
 
      void moveDown();
 
+     void changeDirection();
+
 private:
     int speed;
     int xPosition;
