@@ -7,67 +7,100 @@ GameBase::GameBase()
 {
     createCentipedeseg();
     getCentipedesegVectors();
+    createMushrooms();
+    GetMushrooms();
     state = Online;
     win = false;
     score = 0;
-}
-
-void GameBase::setState(GameState gameState)
-{
-    state = gameState;
-}
-void GameBase::PlayerMoveleft()
-{
-     player_.moveLeft();
-}
-void GameBase::PlayerMoveRight()
-{
-     player_.moveRight();
-}
-void GameBase::createCentipedeseg()
-{
-    centipedeController_.createCentipede();
-}
-
-void GameBase::shootPlayerBullet()
-{
-    bulletsController.add( player_.getXpos(),  player_.getYpos(), UP);
-
-}
-
-void GameBase::getCentipedesegVectors()
-{
-    centipedetail = centipedeController_.getVectorOfcentipedetail();
-    headsegment = centipedeController_.getVectorOfheadsegment();
-}
-void GameBase::setCentipedesegVectors()
-{
-    centipedeController_.setVectorOfcentipedetail(centipedetail);
-    centipedeController_.setVectorOfheadsegment(headsegment);
 }
 
 void GameBase::gameLogic()
 {
     centipedeController_.update();
     getCentipedesegVectors();
+    mushroomController_.update();
+    GetMushrooms();
     bulletsController.update();
     bullets = bulletsController.getBullets();
     CollisionDetector col;
-    col.checkCollisions(centipedetail,headsegment,bullets);
+    col.checkCollisions(centipede,bullets,player_,mushrooms_,mushroomController_);
     score += col.getScore();
     if(col.isGameOver() || allCentipedesegDead())
     {
         bullets.clear();
         state = GameOver;
-        if(allCentipedesegDead()) win = true;
+        if(allCentipedesegDead()) {win = true;}
     }
     bulletsController.setBullets(bullets);
     setCentipedesegVectors();
 }
 
+void GameBase::setState(GameState gameState)
+{
+    state = gameState;
+}
+
+void GameBase::PlayerMoveleft()
+{
+    player_.setDirection(Direction::LEFT);
+    player_.moveLeft();
+}
+
+void GameBase::PlayerMoveRight()
+{
+    player_.setDirection(Direction::RIGHT);
+    player_.moveRight();
+}
+
+void GameBase::PlayerMoveDown()
+{
+    player_.setDirection(Direction::DOWN);
+    player_.moveDown();
+}
+
+void GameBase::PlayerMoveUp()
+{
+    player_.setDirection(Direction::UP);
+    player_.moveUp();
+}
+
+void GameBase::createCentipedeseg()
+{
+    centipedeController_.createCentipede(10);
+}
+
+void GameBase::createMushrooms()
+{
+    mushroomController_.createMushrooms(100);
+}
+
+void GameBase::shootPlayerBullet()
+{
+    bulletsController.add(player_.getXpos(),  player_.getYpos());
+}
+
+void GameBase::getCentipedesegVectors()
+{
+    centipede = centipedeController_.getVecofCentipede();
+}
+
+void GameBase::GetMushrooms()
+{
+    mushrooms_= mushroomController_.getVecOfMushrooms();
+}
+
+void GameBase::setCentipedesegVectors()
+{
+    centipedeController_.setVecofCentipede(centipede);
+}
+
+void GameBase::setMushrooms()
+{
+    mushroomController_.setVecOfMushrooms(mushrooms_);
+}
+
 bool GameBase::allCentipedesegDead()
 {
-    if(centipedetail.size()==0 && headsegment.size()==0)
-        return true;
-    return false;
+    if(centipede.size()==0) {return true;}
+    else{return false;}
 }
