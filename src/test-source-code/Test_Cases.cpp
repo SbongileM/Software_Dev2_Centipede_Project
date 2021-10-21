@@ -35,6 +35,18 @@ TEST_CASE("Player moves up")
     CHECK(x==tempx);
 }
 
+TEST_CASE("Player moves down")
+{
+    auto player = Player();
+    auto tempx = player.getXpos();
+    auto tempy = player.getYpos();
+    player.moveDown();
+    auto x = player.getXpos();
+    auto y = player.getYpos();
+
+    CHECK(y>tempy);
+    CHECK(x==tempx);
+}
 // ------------- Tests for Centipede ----------------
 //
 
