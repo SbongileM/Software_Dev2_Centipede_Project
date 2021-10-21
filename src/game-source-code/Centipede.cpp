@@ -4,102 +4,80 @@
 using namespace std;
 
 
-Centipede::Centipede(float x, float y)
+Centipede::Centipede(int x, int y)
 {
-    state_of_centipede = ALIVE;
+    state_of_centipedeSegment = ALIVE;
     xPosition = x;
     yPosition = y;
-    formationXpos = x;
-    formationYpos = y;
+}
+
+void Centipede::setState(State state)
+{
+    state_of_centipedeSegment = state;
+}
+
+void Centipede::setDirection (Direction direction)
+{
+    direction_=direction;
+}
+
+void Centipede::setBodyType(BodyType type)
+{
+    type_= type;
+}
+
+void Centipede::setBottomFlag(bool flag)
+{
+    reached_bottom =flag;
 }
 
 void Centipede::moveLeft()
 {
-    if(xPosition > 0)
+    if (isAlive())
     {
-
-        if (isAlive())
-        {
-            xPosition -= speed;
-            if (yPosition < formationYpos-5)yPosition += speed;
-            else if (yPosition > formationYpos+5)
-            {
-                yPosition = 0;
-                xPosition = formationXpos;
-            }
-        }
-            formationXpos -= speed;
+        xPosition -= speed;
     }
 }
 
 void Centipede::moveRight()
 {
-    if(xPosition < 670)
+    if (isAlive())
     {
-        if (isAlive())
-        {
-            xPosition += speed;
-            if (yPosition < formationYpos-5) yPosition += speed;
-            else if (yPosition > formationYpos+5)
-            {
-                yPosition = 0;
-                xPosition = formationXpos;
-            }
-        }
-            formationXpos+=speed;
+        xPosition += speed;
     }
 }
 
-void Centipede::dive()
+void Centipede::moveDown()
 {
-    if (isDiving() && yPosition < 700)
-    {
-        if(xPosition >= 0 && xPosition <= 670)
-        {
-                xPosition += (2*speed*sin(yPosition/30));
-                yPosition += speed;
-        }
-        else
-        {
-            if(xPosition >= 670)
-            {
-                xPosition += -speed;
-                yPosition += speed;
-            }
-            else if (xPosition <= 0)
-            {
-                xPosition += speed;
-                yPosition += speed;
-            }
-        }
-    }
-    if(yPosition >= 700) state_of_centipede = ALIVE;
+    yPosition += 20;
+}
+
+void Centipede::moveUp()
+{
+    yPosition -= 20;
 }
 
 bool Centipede::isAlive()
 {
-    return state_of_centipede == ALIVE;
+    return state_of_centipedeSegment == ALIVE;
 }
+
 bool Centipede::isDead()
 {
-    return state_of_centipede==DEAD;
-}
-bool Centipede::isDiving()
-{
-    return state_of_centipede == DIVING;
+    return state_of_centipedeSegment ==DEAD;
 }
 
-void Centipede::setState(State state)
+void Centipede::changeDirection()
 {
-    state_of_centipede = state;
-}
+     if (getDirection()== Direction::RIGHT)
+        {
+            moveLeft();
+            setDirection(Direction::LEFT);
+        }
 
-float Centipede::getXpos()
-{
-    return xPosition;
-}
-
-float Centipede::getYpos()
-{
-    return yPosition;
+     else if (getDirection()== Direction::LEFT)
+        {
+            moveRight();
+            setDirection(Direction::RIGHT);
+        }
 }
