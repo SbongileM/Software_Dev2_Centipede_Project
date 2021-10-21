@@ -1,19 +1,15 @@
 #include "DrawText.h"
-#include <iostream>
 #include <sstream>
+#include<stdexcept>
 
 using namespace std;
 
 DrawText::DrawText()
 {
-    font.loadFromFile("resources/transformers_movie.ttf");
+    if(!font.loadFromFile("resources/transformers_movie.ttf")){throw logic_error("transformers_movie.ttf could not be opened");}
     color = Color::White;
 }
 
-void DrawText::setTextColor(Color newColor)
-{
-    color = newColor;
-}
 void DrawText::setFont(string newFont)
 {
     font.loadFromFile(newFont);
