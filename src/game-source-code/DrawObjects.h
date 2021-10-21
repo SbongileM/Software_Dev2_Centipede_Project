@@ -6,31 +6,26 @@
 class DrawObjects
 {
 public:
-    /** \brief Default Constructor
-     *
-     */
     DrawObjects();
 
-    /** \brief Draws Centipede objects, Galaxip object and the Bullet objects on to the window.
-     *
-     * \param RenderWindow&
-     * \param VecOfCentipede
-     * \param VecOfCentipede
-     * \param VecOfCentipede
-     * \param VecOfCentipede
-     * \param BulletList
-     * \param Galaxip
-     */
-    void drawObjects(RenderWindow&,VecOfCentipede,VecOfCentipede,BulletList, Player);
+    void drawObjects(RenderWindow&,VecOfCentipede,BulletList, Player,Mushrooms);
 
 private:
-    Texture texture;
+    bool win = false;
     Color color;
+    Texture player_;
+    Texture bullet;
+    Texture bodysegment;
+    Texture head;
+    Texture mushroom1;
+    Texture mushroom2;
+    Texture mushroom3;
+    Texture mushroom4;
+
     void drawBullets(RenderWindow& window, BulletList bullets);
     void drawCentipede(VecOfCentipede centipede, RenderWindow& window);
+    void drawMushrooms(Mushrooms mushroomz,RenderWindow& window);
     void drawObject(Texture texture, float x, float y, RenderWindow&);
-    void drawBullet(Texture texture,float x, float y, RenderWindow& window);
-    bool win = false;
 };
 
 #endif // DRAWOBJECTS_H
