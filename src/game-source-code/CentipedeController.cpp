@@ -2,120 +2,116 @@
 #include <cstdlib>
 #include <time.h>
 
-CentipedeController::CentipedeController()
-{
-    flag = false;
-}
+CentipedeController::CentipedeController() { }
 
-void CentipedeController::createCentipede()
+void CentipedeController::createCentipede(int number_ofSegments)
 {
-    for (int i =20; i<500; i+=30)
+    auto temp = number_ofSegments;
+
+    for (int i =300; i <(300+(20*temp)); i+=20)
     {
-        for (int j =30; j<230; j+=50)
+        int j = 40;
+
+        if (i == 300)
         {
-            if ((i == 20) && (j == 30))
-            {
-                shared_ptr<Centipede> headsegment_(new Centipede(i,j));
-                headsegment.push_back( headsegment_);
-            }
-            if ((i > 20) && (i < 500)&& (j == 30))
-            {
-                shared_ptr<Centipede> Centitail(new Centipede(i,j));
-                centipedetail.push_back(Centitail);
-            }
+            shared_ptr<Centipede> headsegment_(new Centipede(i,j));
+            (headsegment_)->setDirection(Direction::LEFT);
+            (headsegment_)->setBodyType(BodyType::HEAD);
+            centipede_.push_back( headsegment_);
+        }
+        else
+        {
+            shared_ptr<Centipede> bodyseg(new Centipede(i,j));
+            (bodyseg)->setDirection(Direction::LEFT);
+            (bodyseg)->setBodyType(BodyType::BODYSEG);
+            centipede_.push_back(bodyseg);
         }
     }
 }
 
-void CentipedeController::moveFormation()
+void CentipedeController::moveCentipede()
 {
-    unsigned int number_of_deadcentipedetail = 0;
-    for (auto iter=begin(centipedetail); iter!=end(centipedetail); ++iter)
+    for (auto iter=begin(centipede_); iter!=end(centipede_); ++iter)
     {
-        if((*iter)->isDead())number_of_deadcentipedetail++;
-        if(flag == false) (*iter)->moveLeft();
-        else(*iter)->moveRight();
-    }
-    for (auto iter=begin(headsegment); iter!=end(headsegment); ++iter)
-    {
-        if((*iter)->isDead())number_of_deadcentipedetail++;
-        if(flag == false) (*iter)->moveLeft();
-        else(*iter)->moveRight();
-    }
-}
+        if ((*iter)->HasReachedBottom() == false){moveDown((*iter));}
 
+        else if ((*iter)->HasReachedBottom() == true){moveUp((*iter));}
 
-void CentipedeController::moveDiving(VecOfCentipede tail)
-{
-    for (auto iter=begin(tail); iter!=end(tail); ++iter)
-    {
-        if((*iter)->isDiving())
+        switch ((*iter)->getDirection())
         {
-            randomNum = (rand() % (10)) + 1;
-            Position pos;
-            if(randomNum == 7 )
-            {
-                pos.push_back((*iter)->getXpos());
-                pos.push_back((*iter)->getYpos());
-                _bulletPositions.push_back(pos);
-            }
-            (*iter)->dive();
-
+        case Direction::RIGHT:
+            (*iter)->moveRight();
+            break;
+        case Direction::LEFT:
+            (*iter)->moveLeft();
+            break;
+        default:
+            break;
         }
     }
 }
 
-void CentipedeController::moveDivingObjects()
+void CentipedeController::moveDown(shared_ptr<Centipede>& centipede)
 {
-    _bulletPositions.clear();
-    moveDiving(centipedetail);
-    setFlag(centipedetail);
-    setFlag(headsegment);
+    if (centipede->getYpos() >= 640){centipede->setBottomFlag(true);}
+
+    else
+    {
+        if(centipede->getXpos() <= 0)
+        {
+            centipede->setDirection(Direction::RIGHT);
+            centipede->moveDown();
+        }
+
+        else if(centipede->getXpos() >= 675)
+        {
+            centipede->setDirection(Direction::LEFT);
+            centipede->moveDown();
+        }
+    }
 }
 
-void CentipedeController::setFlag(VecOfCentipede tail)
+void CentipedeController::moveUp(shared_ptr<Centipede>& centipede)
 {
-    for (auto iter=begin(tail); iter!=end(tail); ++iter)
+    if (centipede->getYpos() <= 500){centipede->setBottomFlag(false);}
+
+    else
     {
-        if(!(*iter)->isDead() && (*iter)->getXpos() <= 0 )
+        if(centipede->getXpos() <= 0)
         {
-            flag = true;
+            centipede->setDirection(Direction::RIGHT);
+            centipede->moveUp();
         }
-        if(!(*iter)->isDead() && (*iter)->getXpos() >= 670 )
+
+        else if(centipede->getXpos() >= 675)
         {
-            flag = false;
+            centipede->setDirection(Direction::LEFT);
+            centipede->moveUp();
         }
     }
 }
 
 void CentipedeController::update()
 {
-    moveDivingObjects();
-    moveFormation();
-    deleteDeadCentipede(centipedetail);
-    deleteDeadCentipede(headsegment);
+    moveCentipede();
+    deleteDeadCentipede(centipede_);
 }
 
-void  CentipedeController::deleteDeadCentipede(VecOfCentipede& tail)
+void  CentipedeController::deleteDeadCentipede(VecOfCentipede& centipede)
 {
     VecOfCentipede temp;
-    for (auto Centipede : tail)
+
+    for (auto Centip : centipede)
     {
-        if (!Centipede->isDead())
-        {
-            temp.push_back(Centipede);
-        }
+        if(Centip->isAlive()){temp.push_back(Centip);}
     }
-    tail.clear();
-    tail = temp;
+
+    centipede.clear();
+    centipede = temp;
 }
 
-void CentipedeController::setVectorOfcentipedetail(VecOfCentipede tail)
+void CentipedeController::setVecofCentipede (VecOfCentipede centipede)
 {
-    centipedetail = tail;
+    centipede_ = centipede;
 }
 
-void  CentipedeController::setVectorOfheadsegment(VecOfCentipede Head)
-{
-    headsegment = Head;
-}
