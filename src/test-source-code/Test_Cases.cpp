@@ -125,5 +125,22 @@ TEST_CASE("Bullet is Dead")
 
 // ------------- Tests for Collisions ----------------
 //
-//// Test null case for contains() first - here, an empty line
+TEST_CASE("Mushroom loses live after colliding with a bullet")
+{
+    CollisionDetector collisionHandler;
+    VecOfCentipede centipede;
+    BulletList bullets;
+    Player player;
+    Mushrooms mushrooms;
+    MushroomController controller;
+
+    shared_ptr<Mushroom> muShroom(new Mushroom(365,450));
+    mushrooms.push_back(muShroom);
+
+    BulletPtr bullet(new Bullet(365,450));
+    bullets.push_back(bullet);
+    collisionHandler.checkCollisions(centipede,bullets,player,mushrooms,controller);
+
+    CHECK(mushrooms[0]->getLives() == 2);
+}
 
