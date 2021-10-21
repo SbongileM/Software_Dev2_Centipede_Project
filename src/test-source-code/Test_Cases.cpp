@@ -109,6 +109,16 @@ TEST_CASE("Bullet is Alive")
     CHECK(bullet.isAlive());
 }
 
+TEST_CASE("Bullet is Dead")
+{
+    auto x = 365.0,y =445.0;
+    auto bullet = Bullet(x,y);
+    auto dead = State::DEAD;
+    bullet.setState(dead);
+
+    CHECK(bullet.isDead());
+}
+
 // ------------- Tests for Centipede ----------------
 //
 
