@@ -1,11 +1,29 @@
 #include "Mushroom.h"
 
-Mushroom::Mushroom()
+Mushroom::Mushroom(int x, int y)
 {
-    //ctor
+    lives = 3;
+    state_of_mushroom = ALIVE;
+    xPosition = x;
+    yPosition = y;
 }
 
-Mushroom::~Mushroom()
+bool Mushroom::isAlive()
 {
-    //dtor
+    return state_of_mushroom == ALIVE;
+}
+
+bool Mushroom::isDead()
+{
+    return state_of_mushroom == DEAD;
+}
+
+void Mushroom::setLives(int _lives)
+{
+    lives = _lives;
+}
+
+void Mushroom::setState(State state)
+{
+    state_of_mushroom = state;
 }
