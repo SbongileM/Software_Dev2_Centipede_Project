@@ -5,7 +5,7 @@ using std::end;
 #include "Bullet.h"
 #include "Configuration.h"
 
-Bullet::Bullet(float x,float y)
+Bullet::Bullet(int x,int y)
 {
     _position = Position();
     _position.push_back(x);

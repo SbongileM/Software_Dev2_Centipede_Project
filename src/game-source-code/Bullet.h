@@ -12,7 +12,7 @@ using std::shared_ptr;
 class Bullet
 {
 public:
-    Bullet(float x, float y);
+    Bullet(int x, int y);
 
     bool isAlive(){return _state == ALIVE;};
 
