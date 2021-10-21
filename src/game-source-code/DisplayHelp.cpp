@@ -4,24 +4,27 @@
 #include <fstream>
 
 using namespace std;
-DisplayHelp::DisplayHelp(){ }//Default Constructor
+DisplayHelp::DisplayHelp(){ }
 
 void DisplayHelp::getHelp(RenderWindow& window, ScreenView& screenView)
 {
     help(window, screenView);
 }
+
 void DisplayHelp::help(RenderWindow& window, ScreenView& screenView)
 {
     while (window.isOpen() && screenView == HELP)
     {
         Event event;
+
         while (window.pollEvent(event))
         {
-            if(event.type == sf::Event::Closed) window.close();
+            if(event.type == Event::Closed) {window.close();}
+
             else if (event.type == Event::KeyPressed)
             {
-                if ((event.type == sf::Event::Closed) || ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))) window.close();
-                if (event.key.code == Keyboard::BackSpace) screenView = MENU;
+                if (event.key.code == Keyboard::Escape) {window.close();}
+                if (event.key.code == Keyboard::BackSpace) {screenView = MENU;}
             }
         }
         window.clear(Color::Black);
@@ -37,9 +40,10 @@ void DisplayHelp::screenConstants(RenderWindow& window)
 
     display.setTextColor(Color::White);
     display.setFont("resources/font.ttf");
-
     ifstream filereader("resources/help.txt");
-    if (!filereader) throw logic_error("help.txt could not be opened");
+
+    if (!filereader) {throw logic_error("help.txt could not be opened");}
+
     while (getline(filereader, line))
     {
         yPos += +30;
