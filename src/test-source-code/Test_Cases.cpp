@@ -96,6 +96,19 @@ TEST_CASE("Player moves at a correct speed")
      y = player.getYpos();
     CHECK(y==tempy);
 }
+
+// ------------- Tests for Bullet ----------------
+
+TEST_CASE("Bullet is Alive")
+{
+    auto x = 365.0,y =445.0;
+    auto bullet = Bullet(x,y);
+    auto alive = State::ALIVE;
+    bullet.setState(alive);
+
+    CHECK(bullet.isAlive());
+}
+
 // ------------- Tests for Centipede ----------------
 //
 
