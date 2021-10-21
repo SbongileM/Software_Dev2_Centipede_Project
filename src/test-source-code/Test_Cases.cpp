@@ -60,6 +60,20 @@ TEST_CASE("Player moves left")
     CHECK(y==tempy);
     CHECK(x<tempx);
 }
+
+TEST_CASE("Player moves right")
+{
+    auto player = Player();
+    auto tempx = player.getXpos();
+    auto tempy = player.getYpos();
+    player.moveRight();
+    auto x = player.getXpos();
+    auto y = player.getYpos();
+
+    CHECK(y==tempy);
+    CHECK(x>tempx);
+}
+
 // ------------- Tests for Centipede ----------------
 //
 
