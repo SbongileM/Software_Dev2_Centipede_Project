@@ -2,8 +2,8 @@
 #define CONFIGURATION_H
 
 const int SCREENWIDTH = 700;
-const int SCREENHEIGHT = 700;
-const float DEFAULTSPEED = 20.0;
-const int BULLETRADIUS =3;
+const int SCREENHEIGHT = 660;
+const float DEFAULTSPEED = 40.0;
 
 #endif
+
