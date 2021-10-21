@@ -7,34 +7,17 @@
 class Game
 {
 public:
-    /** \brief Default Constructor
-     *
-     * Initialises the win condition to false, the score to zero.
-     * It also sets the number of lives for the player to 3 and
-     * paints the background.
-     */
     Game();
-    /** \brief Displays the main loop of the game onto the window.
-     *
-     * \param RenderWindow&
-     * \param ScreenView&
-     */
+
     void getGame(RenderWindow&, ScreenView&);
 
 private:
-    void endOfGame(RenderWindow&, ScreenView&);
-    void getGameObjects();
-    void paintBackground();
-    void pollforUserInput(RenderWindow& window);
-    void saveHighScore();
-    void screenConstants(RenderWindow&);
-    void startGame(RenderWindow&, ScreenView&);
-    string getHighScore();
-
     bool win;
     int numOfLives,score;
+
     string highScore;
     string convertToString(int Num);
+
     Sprite  background;
     Texture texture;
     BulletList bullets;
@@ -42,8 +25,24 @@ private:
     DrawObjects drawObjects;
     Player player_;
     GameBase gamelogic;
-    VecOfCentipede centipedetail;
-    VecOfCentipede headsegment;
+    VecOfCentipede centipede;
+    Mushrooms mushrooms_;
+
+    string getHighScore();
+
+    void endOfGame(RenderWindow&, ScreenView&);
+
+    void getGameObjects();
+
+    void paintBackground();
+
+    void pollforUserInput(RenderWindow& window);
+
+    void saveHighScore();
+
+    void screenConstants(RenderWindow&);
+
+    void startGame(RenderWindow&, ScreenView&);
 };
 
 #endif // GAME_H
