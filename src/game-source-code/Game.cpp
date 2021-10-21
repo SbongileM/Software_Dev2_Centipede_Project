@@ -13,7 +13,11 @@ Game::Game()
     win = false;
     score = 0;
     numOfLives = 1;
+<<<<<<< HEAD
     if(!texture.loadFromFile("resources/game_over.png")){throw logic_error("game_over.png could not be opened");}
+=======
+    texture.loadFromFile("resources/game_over.png");
+>>>>>>> 7f56763008391ad6af30bc2dfe3a3813442fb53b
     paintBackground();
 }
 

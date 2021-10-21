@@ -9,23 +9,23 @@ typedef vector<int> Position;
 
 typedef enum
 {
-  LEFT,
-  RIGHT,
-  UP,
-  DOWN
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN
 } Direction;
 
 typedef enum
-{ALIVE,
- DIVING,
-  DEAD
-}State;
+{
+    ALIVE,
+    DEAD
+} State;
 
 typedef enum
 {
     MENU,
     GAME,
     HELP
-}ScreenView;
+} ScreenView;
 
 #endif

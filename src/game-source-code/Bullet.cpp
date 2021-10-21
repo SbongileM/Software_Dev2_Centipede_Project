@@ -23,7 +23,12 @@ void Bullet::moveBullet()
 void Bullet::moveUp()
 {
     if ( _position[1] > 0 ){_position[1] -= _speed;}
+<<<<<<< HEAD
 
     else{_state = DEAD;}
 }
+=======
+>>>>>>> 7f56763008391ad6af30bc2dfe3a3813442fb53b
 
+    else{_state = DEAD;}
+}

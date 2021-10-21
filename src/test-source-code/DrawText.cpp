@@ -1,5 +1,4 @@
 #include "DrawText.h"
-#include <iostream>
 #include <sstream>
 
 using namespace std;
@@ -10,10 +9,6 @@ DrawText::DrawText()
     color = Color::White;
 }
 
-void DrawText::setTextColor(Color newColor)
-{
-    color = newColor;
-}
 void DrawText::setFont(string newFont)
 {
     font.loadFromFile(newFont);

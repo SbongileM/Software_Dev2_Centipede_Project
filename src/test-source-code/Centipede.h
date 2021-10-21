@@ -7,81 +7,57 @@
 using std::vector;
 using namespace std;
 
+enum class BodyType
+{
+    HEAD,
+    BODYSEG
+};
+
 class Centipede
 {
 public:
-     /** \brief Constructor
-     *
-     * It sets the x and y coordinates of a centipede.
-     *
-     * \param x float
-     * \param y float
-     *
-     */
-    Centipede(float x, float y);
+    Centipede(int x, int y);
 
-    /** \brief Returns the x position of a centipedeseg.
-     *
-     * \return float
-     *
-     */
-    float getXpos();
+    int getXpos(){return xPosition;};
 
-    /** \brief Returns the y position of a centipedeseg.
-     *
-     * \return float
-     *
-     */
-    float getYpos();
+    int getYpos(){return yPosition;};
 
-    /** \brief Returns true if the centipedeseg is ALIVE.
-     *
-     * \return bool
-     *
-     */
-    bool isAlive();
+    Direction getDirection (){return direction_;};
 
-    /** \brief Returns true if the centipedeseg is DEAD.
-     *
-     * \return bool
-     *
-     */
-    bool isDead();
+    BodyType getBodyType(){return type_;};
 
-    /** \brief Returns true if the centipedeseg is DIVING.
-     *
-     * \return bool
-     *
-     */
-    bool isDiving();
+    bool HasReachedBottom() {return reached_bottom;};
 
-    /** \brief Moves a centipedeseg a centipedeseg to the left.
-     *
-     */
-    void moveLeft();
-
-    /** \brief Moves a centipedeseg a centipedeseg to the right.
-     *
-     */
-    void moveRight();
-
-    /** \brief Controls how the centipedeseg dives.
-     *
-     */
-    void dive();
-
-    /** \brief Sets the state of a centipedeseg to DEAD or ALIVE.
-     *
-     */
     void setState(State state);
 
+    void setDirection(Direction direction);
+
+    void setBodyType(BodyType type);
+
+    void setBottomFlag(bool flag);
+
+    bool isAlive();
+
+    bool isDead();
+
+    void moveLeft();
+
+    void moveRight();
+
+    void moveDown();
+
+    void moveUp();
+
+    void changeDirection();
+
 private:
-    float formationXpos;
-    float formationYpos;
-    float xPosition;
-    float yPosition;
-    State state_of_centipede;
-    double speed = 8;
+    int xPosition;
+    int yPosition;
+    State state_of_centipedeSegment;
+    Direction direction_;
+    BodyType type_;
+    int speed = 20;
+    bool reached_bottom = false;
 
 };
 

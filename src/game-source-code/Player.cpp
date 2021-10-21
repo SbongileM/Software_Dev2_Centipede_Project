@@ -8,6 +8,16 @@ Player::Player()
     state_of_player = ALIVE;
 }
 
+void Player::moveUp()
+{
+    if(yPosition > 500){yPosition -= speed;}
+}
+
+void Player::moveDown()
+{
+    if(yPosition < 630){yPosition += speed;}
+}
+
 void Player::moveLeft()
 {
     if(xPosition > 0){xPosition -= speed;}
@@ -20,12 +30,16 @@ void Player::moveDown()
 
 void Player::moveRight()
 {
+<<<<<<< HEAD
     if(xPosition < 665){xPosition += speed;}
 }
 
 void Player::moveUp()
 {
     if(yPosition > 500){yPosition -= speed;}
+=======
+    if(xPosition < 665)xPosition += speed;
+>>>>>>> 7f56763008391ad6af30bc2dfe3a3813442fb53b
 }
 
 bool Player::isAlive()

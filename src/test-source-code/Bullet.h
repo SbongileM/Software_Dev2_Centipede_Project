@@ -12,65 +12,29 @@ using std::shared_ptr;
 class Bullet
 {
 public:
-    /** \brief Constructor
-     *
-     * \param  float : x coordinate of the bullet
-     * \param  float : y coordinate of the bullet
-     * \param  Direction : direction of the bullet
-     */
-  Bullet(float x, float y, Direction dir);
+    Bullet(int x, int y);
 
-   /** \brief This function returns the direction of the bullet.
-    *         There are two possible directions, either UP or DOWN.
-    *
-    * \return Direction of the Bullet
-    *
-    */
+    bool isAlive(){return _state == ALIVE;};
 
-    Direction getDirection() { return _direction; };
+    bool isDead(){return _state == DEAD;};
 
-  /** \brief This function moves the Bullet either UP or DOWN.
-   */
-  void move();
+    float getXpos(){return _position[0];};
 
-  /** \brief Checks if the bullet is alive.
-   */
-  bool isAlive(){ return _state == ALIVE; };
+    float getYpos(){return _position[1];};
 
-  /** \brief Checks if the bullet is Dead.
-   */
-  bool isDead() { return _state == DEAD; };
+    void setState(State state){_state = state;};
 
-  /** \brief Returns current x position of the bullet.
-   *
-   * \return float
-   *
-   */
-  float getXpos() { return _position[0]; };
+    void moveBullet();
 
 
-  /** \brief Returns current y position of the bullet.
-   *
-   * \return float
-   *
-   */
-  float getYpos() { return _position[1]; };
+private:
+    float _lifePoints;
+    Position _position;
+    State _state;
+    float _speed;
 
-  /** \brief Sets the state of the bullet, namely DEAD or ALIVE.
-   *
-   * \param state State
-   */
-  void setState(State state) { _state = state; };
-
-
- private:
-  float _lifePoints;
-  Position _position;
-  Direction _direction;
-  State _state;
-  float _speed;
-  float speed();
-  void moveUp();
+    float speed();
+    void moveUp();
 
 
 };

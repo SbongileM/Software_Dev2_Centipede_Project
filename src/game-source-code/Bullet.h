@@ -18,9 +18,15 @@ public:
 
     bool isDead(){return _state == DEAD;};
 
+<<<<<<< HEAD
     int getXpos(){return _position[0];};
 
     int getYpos(){return _position[1];};
+=======
+    float getXpos(){return _position[0];};
+
+    float getYpos(){return _position[1];};
+>>>>>>> 7f56763008391ad6af30bc2dfe3a3813442fb53b
 
     void setState(State state){_state = state;};
 
@@ -32,6 +38,12 @@ private:
     Position _position;
     State _state;
     float _speed;
+<<<<<<< HEAD
+=======
+
+    float speed();
+    void moveUp();
+>>>>>>> 7f56763008391ad6af30bc2dfe3a3813442fb53b
 
     float speed();
     void moveUp();
