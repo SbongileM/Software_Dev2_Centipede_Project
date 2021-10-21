@@ -11,90 +11,27 @@ using namespace std;
 class CentipedeController
 {
 public:
- /** \brief A constructor, which sets a flag to FALSE
-     *
-     */
     CentipedeController();
 
-    /** \brief Returns bullet positions.
-     *
-     * \return vector of bullet positions
-     *
-     */
-    vector<Position> getBulletPositions() {return _bulletPositions;};
+    VecOfCentipede getVecofCentipede() {return centipede_;};
 
-    /** \brief Returns Centipedes in lower level of formation.
-     *
-     * \return vector of Centipedes
-     *
-     */
-    VecOfCentipede getVectorOfcentipedetail() {return centipedetail;};
+    void createCentipede( int number_ofSegments);
 
-    /** \brief Returns Centipedes in second level of formation.
-     *
-     * \return vector of Centipedes
-     *
-     */
-    VecOfCentipede getVectorOfheadsegment() {return headsegment;};
+    void setVecofCentipede (VecOfCentipede centipede);
 
-    /** \brief Creates all the Centipedes and determines how far apart they are.
-     *
-     */
-    void createCentipede();
-
-    /** \brief Creates a vector of Centipedes.
-     *
-     *  \param vector of Centipedes
-     */
-    void setVectorOfcentipedetail(VecOfCentipede centipedetail);
-
-    /** \brief Creates a second vector of Centipedes.
-     *
-     *  \param vector of Centipedes
-     */
-    void setVectorOfheadsegment(VecOfCentipede headsegment);
-
-    /** \brief Creates a vector of a special type of Centipede
-     *          known as flagship escorts.
-     *
-     *  \param vector of Centipedes
-     */
-
-    /** \brief Moves Centipedes and updates all Centipede vectors by making
-     *          sure that dead Centipedes are deleted.
-     *
-     */
     void update();
 
 private:
-    /** \brief Responsible for the movement of diving Centipedes.
-     *
-     *  \param vector of Centipedes
-     */
-    void moveDiving(VecOfCentipede centipedetail);
+    VecOfCentipede centipede_;
 
-    /** \brief Responsible for the movement of diving Centipedes
-     *
-     */
-    void moveDivingObjects();
+    void moveCentipede();
 
-    /** \brief Responsible for the movement of Centipedes which are still in formation
-     *
-     */
-    void moveFormation();
+    void deleteDeadCentipede(VecOfCentipede& centipede);
 
-    /** \brief Finds and deletes all dead Centipedes from a Centipede vector
-     *
-     *  \param vector of Centipedes
-     */
-    void deleteDeadCentipede(VecOfCentipede& centipedetail);
+    void moveDown(shared_ptr<Centipede>& centipede);
 
-    int num3, remainder, randomNum;
-    bool flag;
-    VecOfCentipede centipedetail;
-    VecOfCentipede headsegment;
-    vector<Position> _bulletPositions;
-    void setFlag(VecOfCentipede centipedetail);
+    void moveUp(shared_ptr<Centipede>& centipede);
+
 };
 
 #endif // CentipedeCONTROLLER_H

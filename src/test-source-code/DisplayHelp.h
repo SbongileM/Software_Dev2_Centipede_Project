@@ -5,25 +5,16 @@
 
 class DisplayHelp
 {
-    public:
-        /** \brief Default Constuctor
-         *
-         * Sets the font and background for the help view.
-         */
-        DisplayHelp();
-        /** \brief Draws the help menu on the window and allows the navigation of the
-         * back to the menu.
-         *
-         * \param window RenderWindow&
-         * \param screenView ScreenView&
-         */
-        void getHelp(RenderWindow& window, ScreenView& screenView);
+public:
+    DisplayHelp();
+    void getHelp(RenderWindow& window, ScreenView& screenView);
 
-    private:
-        void help(RenderWindow& window, ScreenView& screenView);
-        void paintBackground();
-        void screenConstants(RenderWindow& window);
-        DrawText display;
+private:
+    DrawText display;
+
+    void help(RenderWindow& window, ScreenView& screenView);
+    void paintBackground();
+    void screenConstants(RenderWindow& window);
 };
 
 #endif // DISPLAYHELP_H

@@ -2,7 +2,7 @@
 
 Screen::Screen()
 {
-    window.create(VideoMode(700,700),"CENTIPEDE",Style::Default);
+    window.create(VideoMode(700,660),"CENTIPEDE",Style::Default);
     window.setFramerateLimit(10);
     _screenView = MENU;
 }
@@ -30,7 +30,7 @@ void Screen::display()
         Event event;
         while(window.pollEvent(event))
         {
-            if((event.type == sf::Event::Closed) || ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
+            if((event.type == Event::Closed) || ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Escape)))
             {
                 window.close();
                 break;

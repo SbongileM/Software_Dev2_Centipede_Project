@@ -2,21 +2,30 @@
 
 Player::Player()
 {
-    xPosition = 300;
+    xPosition = 360;
     yPosition = 600;
-    speed = 30;
+    speed = 20;
     state_of_player = ALIVE;
-
 }
 
 void Player::moveLeft()
 {
-    if(xPosition > 0) xPosition -= speed;
+    if(xPosition > 0){xPosition -= speed;}
+}
+
+void Player::moveDown()
+{
+    if(yPosition < 630){yPosition += speed;}
 }
 
 void Player::moveRight()
 {
-    if(xPosition < 660)xPosition += speed;
+    if(xPosition < 665){xPosition += speed;}
+}
+
+void Player::moveUp()
+{
+    if(yPosition > 500){yPosition -= speed;}
 }
 
 bool Player::isAlive()
@@ -29,13 +38,28 @@ void Player::setState(State state)
     state_of_player = state;
 }
 
-float Player::getXpos()
+void Player::setDirection(Direction direction_)
 {
-    return xPosition;
+    direction= direction_;
 }
 
-float Player::getYpos()
+void Player::changeDirection()
 {
-    return yPosition;
+    switch (getDirection())
+        {
+        case Direction::RIGHT:
+            moveLeft();
+            break;
+        case Direction::LEFT:
+            moveRight();
+            break;
+        case Direction::DOWN:
+            moveUp();
+            break;
+        case Direction::UP:
+            moveDown();
+            break;
+        default:
+            break;
+        }
 }
-
